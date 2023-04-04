@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import moment from 'moment'
 import 'moment/locale/id';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router'
 import axios from 'axios'
+import Table from '../components/Table';
 
 export default function Dashboard() {
 
@@ -65,6 +69,23 @@ export default function Dashboard() {
         })
     }
 
+    const deleteAlert = (id) => {
+
+        confirmAlert({
+            title: 'Konfirmasi Hapus',
+            message: 'Apa anda yakin',
+            buttons: [
+                {
+                    label: 'ya',
+                    onClick: () => deleteList(id)
+                },
+                {
+                    label: 'tidak',
+                }
+            ]
+        });
+    }
+
     //function logout
     const logoutHandler = async () => {
         axios.defaults.headers.common['Authorization'] = `${token}`
@@ -73,6 +94,54 @@ export default function Dashboard() {
             history.push('/');
         });
     };
+
+    const columns = useMemo(
+        () => [
+            {
+                Header: "Nama",
+                accessor: "nama",
+            },
+            {
+                Header: "Deskripsi",
+                accessor: "deskripsi",
+            },
+            {
+                Header: "Pendidikan Minimal",
+                accessor: "tingkat_pendidikan_minimal",
+            },
+            {
+                Header: "Tanggal Buka",
+                accessor: "tanggal_dibuka",
+                Cell: ({ cell: { value } }) => {
+                    return (moment(value).format('LL'));
+                }
+            },
+            {
+                Header: "Tanggal Tutup",
+                accessor: "tanggal_ditutup",
+                Cell: ({ cell: { value } }) => {
+                    return (moment(value).format('LL'));
+                }
+            },
+            {
+                Header: "Kuota",
+                accessor: "kuota",
+            },
+            {
+                Header: "Actions",
+                accessor: "id",
+                Cell: ({ cell: { value } }) => {
+                    return (
+                        <>
+                            <Link to={`/edit/${value}`} className="btn btn-warning">Update</Link>
+                            {" "}
+                            <button onClick={() => deleteAlert(value)} className="btn btn-danger">Delete</button>
+                        </>
+                    );
+                }
+            },
+        ], []
+    );
 
     return (
         <div className="container" style={{ marginTop: "50px" }}>
@@ -84,38 +153,7 @@ export default function Dashboard() {
                             <hr />
                             <Link to="/add" className="btn btn-primary mr-2">Create New</Link>
                             <button onClick={logoutHandler} className="btn btn-md btn-danger">Logout</button>
-                            <table className="table table-striped mt-2">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Deskripsi</th>
-                                        <th>Pendidikan Minimal</th>
-                                        <th>Tanggal Buka</th>
-                                        <th>Tanggal Tutup</th>
-                                        <th>Kuota</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {datalist.map((row, index) => (
-                                        <tr key={row.id}>
-                                            <td>{index + 1}</td>
-                                            <td>{row.nama}</td>
-                                            <td>{row.deskripsi}</td>
-                                            <td>{row.tingkat_pendidikan_minimal}</td>
-                                            <td>{moment(row.tanggal_dibuka).format('LL')}</td>
-                                            <td>{moment(row.tanggal_ditutup).format('LL')}</td>
-                                            <td>{row.kuota}</td>
-                                            <td>
-                                                <Link to={`/edit/${row.id}`} className="btn btn-warning">Update</Link>
-                                                {" "}
-                                                <button onClick={() => deleteList(row.id)} className="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                            <Table columns={columns} data={datalist} />
                         </div>
                     </div>
                 </div>
