@@ -18,6 +18,7 @@ function App() {
         <Route exact path="/register" component={Register}></Route>
         <Route exact path="/dashboard" component={Dashboard}></Route>
         <Route exact path="/add" component={AddCrud}></Route>
+        <Route exact path="/edit/:id" component={AddCrud}></Route>
       </Switch>
     </Router>
     // </Provider>

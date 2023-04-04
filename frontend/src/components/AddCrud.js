@@ -24,7 +24,6 @@ export const AddCrud = () => {
                 Authorization: token
             }
         }).then((response) => {
-            console.log(response.data)
             setDataList(response.data);
         })
     }
