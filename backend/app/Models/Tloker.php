@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Article extends Model
+class Tloker extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['title', 'body'];
+    protected $fillable = ['nama', 'deskripsi', 'tingkat_pendidikan_minimal', 'tanggal_dibuka', 'tanggal_ditutup', 'kuota'];
 }

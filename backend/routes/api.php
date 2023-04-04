@@ -39,12 +39,12 @@ Route::group([
     Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
     Route::get('user-profile', 'App\Http\Controllers\AuthController@userProfile');
 
-    // articles
-    Route::get('articles', 'App\Http\Controllers\ArticleController@index');
-    Route::get('articles/{article}', 'App\Http\Controllers\ArticleController@show');
-    Route::post('articles', 'App\Http\Controllers\ArticleController@store');
-    Route::put('articles/{article}', 'App\Http\Controllers\ArticleController@update');
-    Route::delete('articles/{article}', 'App\Http\Controllers\ArticleController@delete');
+    // loker
+    Route::get('loker', 'App\Http\Controllers\LokerController@index');
+    Route::get('loker/{loker}', 'App\Http\Controllers\LokerController@show');
+    Route::post('loker', 'App\Http\Controllers\LokerController@store');
+    Route::put('loker/{loker}', 'App\Http\Controllers\LokerController@update');
+    Route::delete('loker/{loker}', 'App\Http\Controllers\LokerController@delete');
 });
 
 Route::post('login', 'App\Http\Controllers\AuthController@login');

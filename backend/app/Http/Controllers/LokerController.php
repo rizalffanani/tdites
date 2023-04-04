@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
 use Illuminate\Http\Request;
+use App\Models\Tloker;
 
-class ArticleController extends Controller
+class LokerController extends Controller
 {
     /**
      * Create a new ArticleController instance.
@@ -19,31 +19,31 @@ class ArticleController extends Controller
 
     public function index()
     {
-        return Article::all();
+        return Tloker::all();
     }
 
-    public function show(Article $article)
+    public function show(Tloker $loker)
     {
-        return $article;
+        return $loker;
     }
 
     public function store(Request $request)
     {
-        $article = Article::create($request->all());
+        $loker = Tloker::create($request->all());
 
-        return response()->json($article, 201);
+        return response()->json($loker, 201);
     }
 
-    public function update(Request $request, Article $article)
+    public function update(Request $request, Tloker $loker)
     {
-        $article->update($request->all());
+        $loker->update($request->all());
 
-        return response()->json($article, 200);
+        return response()->json($loker, 200);
     }
 
-    public function delete(Article $article)
+    public function delete(Tloker $loker)
     {
-        $article->delete();
+        $loker->delete();
         return response()->json([
             'success' => true,
             'message' => 'data terhapus'
