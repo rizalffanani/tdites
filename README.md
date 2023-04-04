@@ -21,3 +21,7 @@ buka terminal masukkan perintah "npm install"
 npm start
 
 http://localhost:3000/
+
+# Dokumentasi API
+
+https://documenter.getpostman.com/view/12664300/2s93RXrVnG
