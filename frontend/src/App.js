@@ -6,8 +6,6 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import { AddCrud } from "./components/AddCrud";
-import { EditCrud } from "./components/EditCrud";
-
 
 const history = createBrowserHistory();
 
@@ -20,7 +18,6 @@ function App() {
         <Route exact path="/register" component={Register}></Route>
         <Route exact path="/dashboard" component={Dashboard}></Route>
         <Route exact path="/add" component={AddCrud}></Route>
-        <Route exact path="/edit/:id" component={AddCrud}></Route>
       </Switch>
     </Router>
     // </Provider>

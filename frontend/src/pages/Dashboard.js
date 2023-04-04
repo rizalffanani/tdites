@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import moment from 'moment'
+import 'moment/locale/id';
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router'
 import axios from 'axios'
@@ -102,8 +104,8 @@ export default function Dashboard() {
                                             <td>{row.nama}</td>
                                             <td>{row.deskripsi}</td>
                                             <td>{row.tingkat_pendidikan_minimal}</td>
-                                            <td>{row.tanggal_dibuka}</td>
-                                            <td>{row.tanggal_ditutup}</td>
+                                            <td>{moment(row.tanggal_dibuka).format('LL')}</td>
+                                            <td>{moment(row.tanggal_ditutup).format('LL')}</td>
                                             <td>{row.kuota}</td>
                                             <td>
                                                 <Link to={`/edit/${row.id}`} className="btn btn-warning">Update</Link>
